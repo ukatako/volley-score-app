@@ -7,7 +7,6 @@
 
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" type="image/png" href="icon.png">
-
 <style>
 * { box-sizing: border-box; }
 
@@ -366,7 +365,7 @@ input, select {
 
 .history-row {
   display: grid;
-  grid-template-columns: 76px 1fr 56px;
+  grid-template-columns: 68px 1fr 92px;
   align-items: center;
   min-height: 46px;
   padding: 0 12px;
@@ -397,8 +396,9 @@ input, select {
 
 .history-rotation {
   text-align: right;
-  font-size: 21px;
+  font-size: 16px;
   font-weight: 900;
+  white-space: nowrap;
 }
 
 .fixed-actions {
@@ -1168,20 +1168,6 @@ function updateDisplay() {
   renderStats();
 }
 
-function renderSetSummary() {
-  const div = document.getElementById("setSummary");
-  div.innerHTML = "";
-
-  setResults
-    .sort((a,b) => a.setNumber - b.setNumber)
-    .forEach(s => {
-      const pill = document.createElement("span");
-      pill.className = "set-pill";
-      pill.innerHTML = `SET${s.setNumber} <span class="${s.winner === "home" ? "home-text" : s.winner === "away" ? "away-text" : "gray-text"}">${s.homeScore}-${s.awayScore}</span>`;
-      div.appendChild(pill);
-    });
-}
-
 function renderHistory() {
   const historyDiv = document.getElementById("history");
   historyDiv.innerHTML = "";
@@ -1202,15 +1188,15 @@ function renderHistory() {
 
       row.innerHTML = `
         <div class="badge ${badgeClass}">${badgeText}</div>
+
         <div class="score-history">
           <span class="home-text">${item.homeScore}</span>
           <span>-</span>
           <span class="away-text">${item.awayScore}</span>
         </div>
+
         <div class="history-rotation">
-          <span class="home-text">${homeRot}</span>
-          <span>/</span>
-          <span class="away-text">${awayRot}</span>
+          <span class="home-text">${homeRot}</span>/<span class="away-text">${awayRot}</span>
         </div>
       `;
 
