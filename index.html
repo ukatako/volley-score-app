@@ -1197,10 +1197,8 @@ function renderHistory() {
       const badgeClass = item.scoredTeam === "home" ? "home-bg" : "away-bg";
       const badgeText = item.scoredTeam === "home" ? "HOME" : "AWAY";
 
-      const rotationText =
-        item.scoredTeam === "home"
-          ? rotationMap[item.homeRotation]
-          : rotationMap[item.awayRotation];
+      const homeRot = rotationMap[item.homeRotation];
+      const awayRot = rotationMap[item.awayRotation];
 
       row.innerHTML = `
         <div class="badge ${badgeClass}">${badgeText}</div>
@@ -1209,7 +1207,11 @@ function renderHistory() {
           <span>-</span>
           <span class="away-text">${item.awayScore}</span>
         </div>
-        <div class="history-rotation">${rotationText}</div>
+        <div class="history-rotation">
+          <span class="home-text">${homeRot}</span>
+          <span>/</span>
+          <span class="away-text">${awayRot}</span>
+        </div>
       `;
 
       historyDiv.appendChild(row);
