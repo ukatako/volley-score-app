@@ -7,6 +7,12 @@
 
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" type="image/png" href="icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1557e6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Volley Score">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 
 <style>
 * { box-sizing: border-box; }
@@ -1796,5 +1802,15 @@ renderMatchList();
 updateDisplay();
 </script>
 
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(err => {
+      console.log("Service worker registration failed:", err);
+    });
+  });
+}
+</script>
 </body>
 </html>
