@@ -7,12 +7,6 @@
 
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" type="image/png" href="icon.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1557e6">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Volley Score">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-
 
 <style>
 * { box-sizing: border-box; }
@@ -269,7 +263,7 @@ body {
 
 .setting-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 12px;
 }
@@ -614,30 +608,6 @@ textarea {
   background: rgba(0,0,0,0.45);
   z-index: 100;
   align-items: flex-end;
-}
-
-@media (max-width: 480px) {
-  .setting-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .setting-grid > div {
-    min-width: 0;
-    width: 100%;
-  }
-
-  input,
-  select {
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  input[type="date"] {
-    width: 100%;
-    max-width: 100%;
-    -webkit-appearance: none;
-    appearance: none;
-  }
 }
 
 .modal {
@@ -1209,12 +1179,8 @@ for (let i = history.length - 1; i >= 0; i--) {
 }
 
 function confirmResetMatch() {
-  const ok = confirm(
-    `SET${setNumber} をリセットしますか？\n\n現在スコア：${homeScore}-${awayScore}\n\nこのセットの得点履歴は消えます。`
-  );
-
+  const ok = confirm("現在のセットをリセットしますか？\n得点履歴も削除されます。");
   if (!ok) return;
-
   resetCurrentMatch();
 }
 
@@ -1385,9 +1351,9 @@ function renderHistory() {
   const targetSet = historyViewSet;
   const items = history.filter(item => item.setNumber === targetSet);
   const rows = [
-    ...items.map(item => ({ type: "point", item })),
+    ...items.slice().reverse().map(item => ({ type: "point", item })),
     { type: "start" }
-  ].reverse();
+  ];
 
   rows.forEach(rowItem => {
     const row = document.createElement("div");
@@ -1836,15 +1802,5 @@ renderMatchList();
 updateDisplay();
 </script>
 
-
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js").catch(err => {
-      console.log("Service worker registration failed:", err);
-    });
-  });
-}
-</script>
 </body>
 </html>
