@@ -1,4 +1,4 @@
-const CACHE_NAME = "volley-score-mujirushi-v1";
+const CACHE_NAME = "volley-score-mujirushi-v2";
 const ASSETS = [
   "./",
   "./index.html",

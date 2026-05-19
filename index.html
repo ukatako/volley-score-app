@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Volley Score</title>
 
+<meta name="theme-color" content="#1557e6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Volley Score">
+<link rel="manifest" href="manifest.json">
+
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" type="image/png" href="icon.png">
 
@@ -645,6 +651,31 @@ textarea {
 .danger-btn { background: #e91f26; color: white; }
 .primary-btn { background: #1557e6; color: white; }
 .cancel-btn { background: #eee; color: #111; }
+@media (max-width: 480px) {
+  .setting-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .setting-grid > div {
+    min-width: 0;
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  input[type="date"] {
+    width: 100%;
+    max-width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
 </style>
 </head>
 
@@ -1802,5 +1833,15 @@ renderMatchList();
 updateDisplay();
 </script>
 
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(err => {
+      console.log("Service worker registration failed:", err);
+    });
+  });
+}
+</script>
 </body>
 </html>
