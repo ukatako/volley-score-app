@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
 <title>Volley Score</title>
 
 <meta name="theme-color" content="#1557e6">
@@ -16,6 +16,29 @@
 
 <style>
 * { box-sizing: border-box; }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 16px;
+  touch-action: manipulation;
+}
 
 body {
   margin: 0;
@@ -403,6 +426,12 @@ textarea {
   margin-bottom: 8px;
 }
 
+.history-tabs,
+.history {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
 .history-tab {
   flex: 0 0 auto;
   border: none;
@@ -651,6 +680,19 @@ textarea {
 .danger-btn { background: #e91f26; color: white; }
 .primary-btn { background: #1557e6; color: white; }
 .cancel-btn { background: #eee; color: #111; }
+
+.app-version {
+  position: fixed;
+  right: 10px;
+  bottom: calc(env(safe-area-inset-bottom) + 4px);
+  z-index: 30;
+  color: #999;
+  font-size: 11px;
+  font-weight: 800;
+  pointer-events: none;
+  user-select: none;
+}
+
 @media (max-width: 480px) {
   .setting-grid {
     grid-template-columns: 1fr;
@@ -692,6 +734,7 @@ textarea {
 
     <div id="matchList"></div>
     <button class="new-btn" onclick="newMatch()">＋ 新規入力</button>
+    <div class="app-version">v1.0.1</div>
   </div>
 
   <div id="scoreScreen" class="screen">
